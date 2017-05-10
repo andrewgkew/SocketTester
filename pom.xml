@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.aft</groupId>
+    <artifactId>SocketTester</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.8</jdk.version>
+        <maven-compiler.version>3.2</maven-compiler.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- This plugin compiles the code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <finalName>${project.artifactId}-client</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.aft.socket.tcp.SocketClient</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                        <id>shade-client</id>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <finalName>${project.artifactId}-server</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.aft.socket.tcp.SocketServer</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                        <id>shade-server</id>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <finalName>${project.artifactId}-udpClient</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.aft.socket.udp.UDPSocketClient</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                        <id>shade-udp-client</id>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <finalName>${project.artifactId}-udpServer</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.aft.socket.udp.UDPSocketServer</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                        <id>shade-udp-server</id>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <finalName>${project.artifactId}-udpPingPong</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.aft.socket.udp.UDPPingPong</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                        <id>shade-udp-pingpong</id>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <finalName>${project.artifactId}-udpPingPongServer</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.aft.socket.udp.UDPPingPongServer</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                        <id>shade-udp-pingpong-server</id>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
